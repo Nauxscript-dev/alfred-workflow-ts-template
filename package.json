@@ -1,6 +1,6 @@
 {
   "name": "your-workflow-name",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "lint:fix": "eslint . --fix",
