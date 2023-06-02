@@ -30,6 +30,7 @@
     "@jxa/global-type": "^1.3.6"
   },
   "dependencies": {
+    "rimraf": "^5.0.1",
     "rollup": "^3.23.0",
     "rollup-plugin-typescript2": "^0.34.1"
   }
