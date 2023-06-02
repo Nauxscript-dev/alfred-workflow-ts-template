@@ -1,5 +1,3 @@
-
-
 # /bin/bash
 
 # if any return not equal to true, process will quit.
@@ -13,12 +11,14 @@ parentDir=$(pwd)
 
 cd dist
 echo "setup files ..."
-cp ${parentDir}/src/info.plist ./ 
+cp ${parentDir}/info.plist ./ 
 cp ${parentDir}/src/icon.png ./ 
 cp ${parentDir}/README.md ./ 
 cp ${parentDir}/LICENSE ./ 
 
-rm ./index.mjs
+# replace script filter path
+echo "replacing script filter path..."
+sed -i '' 's/dist\/scripts/scripts/g' ./info.plist
 
 # insert the vesion to .plist file, if you need
 echo "Updating version ..."
@@ -33,7 +33,6 @@ sed -i '' -e "/{{readme}}/{r ${readme}" -e 'd' -e '}' ./info.plist
 # insert the auto-update to .plist file, if you need, and you need to fill in the workflow info in that file
 echo "Injecting auto-update script ..."
 update="$(mktemp)"
-# s/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g this pattern is use for repalcing '&' '<' '>'
 cat ${parentDir}/src/update.sh | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g' > ${update}
 sed -i '' -e "/{{update_script}}/{r ${update}" -e 'd' -e '}' ./info.plist
  
